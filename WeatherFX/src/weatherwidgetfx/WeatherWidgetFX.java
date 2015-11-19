@@ -50,7 +50,8 @@ public class WeatherWidgetFX extends Application {
         try {
             
             City city = GoogleMapsGeocoding.getCity(address);
-            System.out.println(city);
+            Forecast forecast = Forecast.getInstance(city);
+            System.out.println(forecast);
             System.exit(0);
             
         } catch (IOException ex) {
