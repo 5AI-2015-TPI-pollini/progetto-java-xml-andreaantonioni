@@ -25,6 +25,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import utility.Utility;
 import weatherwidgetfx.City;
 import weatherwidgetfx.Coordinates;
 
@@ -41,7 +42,7 @@ public class GoogleMapsGeocoding {
 
         String addressEncoded = URLEncoder.encode(address, "UTF-8");
 
-        Document doc = importXML(addressEncoded);
+        Document doc = Utility.importXML(xmlRequest + addressEncoded);
 
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
@@ -96,23 +97,5 @@ public class GoogleMapsGeocoding {
         return false;
     }
 
-    private static Document importXML(String addressEncoded) throws MalformedURLException, IOException {
-        //Apro InputStream con XML di Google Maps
-        URL urlGoogleMaps = new URL(xmlRequest + addressEncoded);
-
-        URLConnection urlConnectionGoogleMaps = urlGoogleMaps.openConnection();
-        InputStream inGoogleMaps = new BufferedInputStream(urlConnectionGoogleMaps.getInputStream());
-
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = null;
-        Document doc = null;
-        try {
-            builder = factory.newDocumentBuilder();
-            doc = builder.parse(inGoogleMaps);
-        } catch (ParserConfigurationException | SAXException ex) {
-            Logger.getLogger(GoogleMapsGeocoding.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return doc;
-    }
+    
 }
