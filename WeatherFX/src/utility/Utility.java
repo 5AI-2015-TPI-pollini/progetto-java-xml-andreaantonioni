@@ -6,11 +6,12 @@
 package utility;
 
 import GoogleMapsGeocode.GoogleMapsGeocoding;
-import static GoogleMapsGeocode.GoogleMapsGeocoding.xmlRequest;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Authenticator;
 import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
@@ -27,9 +28,9 @@ import org.xml.sax.SAXException;
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
 public class Utility {
-    
+
     public static Document importXML(String addressEncoded) throws MalformedURLException, IOException {
-        
+
         System.out.println(addressEncoded);
         //Apro InputStream con XML
         URL url = new URL(addressEncoded);
@@ -48,5 +49,20 @@ public class Utility {
         }
 
         return doc;
+    }
+
+    public static void setProxy(String server, String porta, String username, String password) {
+        System.setProperty("proxySet", "true");
+        System.setProperty("http.proxyHost", server);
+        System.setProperty("http.proxyPort", porta);
+
+        Authenticator.setDefault(new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+
+                return new PasswordAuthentication(username, password.toCharArray());
+            }
+        });
+
     }
 }

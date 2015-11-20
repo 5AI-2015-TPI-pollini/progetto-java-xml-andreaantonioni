@@ -10,6 +10,7 @@ import GoogleMapsGeocode.GoogleMapsGeocoding;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import utility.Utility;
 
 /**
  *
@@ -21,31 +22,7 @@ public class WeatherWidgetFX extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-        /*List<Forecast> list = new ArrayList<>();
-            
-            ObservableList<Forecast> observableList = FXCollections.observableList(list);
-            ListView<Forecast> listView = new ListView<>();
-            listView.setItems(observableList);
-            observableList.add(new Forecast(new Coordinates("", ""), "Brescia"));
-            
-            listView.setCellFactory(new Callback<ListView<Forecast>, ListCell<Forecast>>() {
-            
-            @Override
-            public ListCell<Forecast> call(ListView<Forecast> param) {
-            return new ForecastCell();
-            }
-            });
-            
-            
-            StackPane root = new StackPane();
-            root.getChildren().add(listView);
-            
-            Scene scene = new Scene(root, 300, 250);
-            
-            primaryStage.setTitle("Weather");
-            primaryStage.setScene(scene);
-            primaryStage.show();*/
-        
+        Utility.setProxy("192.168.0.1", "8080", "NOMEUTENTE", "PASSWORD");
         String address = "via Antonio Cantore 9, Brescia";
         try {
             
