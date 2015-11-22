@@ -29,12 +29,20 @@ public class Forecast {
     
     public static final String wunderground = "http://api.wunderground.com/api/3a361d678e2fb458/conditions/forecast/q/";
     
-    private Forecast(City city, Weather weather)
+    Forecast(City city, Weather weather)
     {
         this.city = city;
         this.weather = weather;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+    
     public static Forecast getInstance(City city) throws IOException {
         Document doc = Utility.importXML(wunderground + city.getCoordinates().getLatitude() + "," + 
                 city.getCoordinates().getLongitude() + ".xml");
