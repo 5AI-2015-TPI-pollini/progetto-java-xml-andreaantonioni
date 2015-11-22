@@ -12,17 +12,12 @@ import javafx.scene.control.ListCell;
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
-public class CityCell extends ListCell<City>{
+public class ForecastRender extends ListCell<Forecast>{
 
     @Override
-    protected void updateItem(City item, boolean empty) {
+    protected void updateItem(Forecast item, boolean empty) {
         
-        super.updateItem(item, empty);
         
-        if(item != null)
-        {
-            setText(item.getName());
-        }
     }
     
 }

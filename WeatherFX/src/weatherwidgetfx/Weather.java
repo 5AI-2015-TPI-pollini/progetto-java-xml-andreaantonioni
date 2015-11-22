@@ -11,20 +11,20 @@ package weatherwidgetfx;
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
 public class Weather {
-    private String weather;
+    private String description;
     private String urlIcon;
 
-    public Weather(String weather, String urlIcon) {
-        this.weather = weather;
+    public Weather(String description, String urlIcon) {
+        this.description = description;
         this.urlIcon = urlIcon;
     }
 
-    public String getWeather() {
-        return weather;
+    public String getDescription() {
+        return description;
     }
 
-    public void setWeather(String weather) {
-        this.weather = weather;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUrlIcon() {
@@ -38,6 +38,6 @@ public class Weather {
     @Override
     public String toString()
     {
-        return weather;
+        return description;
     }
 }
