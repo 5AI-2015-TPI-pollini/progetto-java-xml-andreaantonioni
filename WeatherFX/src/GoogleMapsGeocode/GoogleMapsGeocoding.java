@@ -5,18 +5,11 @@
  */
 package GoogleMapsGeocode;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -24,25 +17,33 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import utility.Utility;
-import weatherwidgetfx.City;
-import weatherwidgetfx.Coordinates;
+import weatherfx.City;
+import weatherfx.Coordinates;
 
 /**
- *
+ * The GoogleMapsGeocoding class contains methods to use APIs of geocoding service offered by Google Maps.
+ * 
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
 public class GoogleMapsGeocoding {
 
-    public static final String xmlRequest = "http://maps.googleapis.com/maps/api/geocode/xml?address=";
+    private static final String xmlRequest = "http://maps.googleapis.com/maps/api/geocode/xml?address=";
 
+    /**
+     * It returns a City object obtained using the geocoding service offered by Google Maps to geocode a place.
+     * @param address A String which represents the place to geocode
+     * @return A City object
+     * @see City#this
+     * @throws IOException If the internet connection doesn't work it throws this exception.
+     * @throws NoResultsException If Google Maps doens't find the address.
+     */
     public static City getCity(String address) throws IOException, NoResultsException {
 
         String addressEncoded = URLEncoder.encode(address, "UTF-8");
 
-        Document doc = Utility.importXML(xmlRequest + addressEncoded);
+        Document doc = Utility.importXML(new URL(xmlRequest + addressEncoded));
 
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();

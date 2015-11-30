@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.GUIController">
+   <bottom>
+      <BorderPane prefHeight="27.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <right>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="settingsButton" fitHeight="22.0" fitWidth="35.0" onMouseClicked="#handleSettingsAction" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_RIGHT">
+                     <image>
+                        <Image url="@../resources/settings_icon.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets right="5.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+         </right>
+      </BorderPane>
+   </bottom>
+   <center>
+      <ListView fx:id="list" focusTraversable="false" maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

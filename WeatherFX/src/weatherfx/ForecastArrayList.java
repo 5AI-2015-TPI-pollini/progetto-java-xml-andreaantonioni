@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package weatherwidgetfx;
+package weatherfx;
 
 import GoogleMapsGeocode.GoogleMapsGeocoding;
 import GoogleMapsGeocode.NoResultsException;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,67 +28,78 @@ import org.xml.sax.SAXException;
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
-public class ForecastArray extends ArrayList<Forecast> {
+public class ForecastArrayList {
 
-    public ForecastArray() {
+    public static ObservableList<Forecast> observableList = FXCollections.observableArrayList();
 
-    }
-    
-    /*public ForecastArray(File inputXML) throws IOException {
+    public static void importXML(File inputXML) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputXML);
-            
+
             doc.getDocumentElement().normalize();
-            
+
             NodeList list = doc.getElementsByTagName("forecast");
-            
-            for(int i=0; i<list.getLength(); i++)
-            {
+
+            for (int i = 0; i < list.getLength(); i++) {
                 NodeList forecastList = list.item(i).getChildNodes();
-                
-                Element forecast = (Element) forecastList.item(0);
-                
+
                 //City
-                Element cityList = (Element) forecast.getElementsByTagName("city");
-                
-                Element coordinatesList = (Element) cityList.getElementsByTagName("coordinates");
-                
-                String lat = coordinatesList.getElementsByTagName("lat").item(0).getTextContent();
-                String lng = coordinatesList.getElementsByTagName("lng").item(0).getTextContent();
-                
-                String name = cityList.getElementsByTagName("name").item(0).getTextContent();
-                
+                Node cityList = forecastList.item(0);
+
+                Node coordinatesList = cityList.getChildNodes().item(0);
+
+                String lat = coordinatesList.getChildNodes().item(0).getTextContent();
+                String lng = coordinatesList.getChildNodes().item(1).getTextContent();
+
+                String name = cityList.getChildNodes().item(1).getTextContent();
+
                 City city = new City(new Coordinates(lat, lng), name);
-                
+
                 //Weather
                 NodeList weatherList = forecastList.item(1).getChildNodes();
-                
-                Weather weather = new Weather(weatherList.item(0).getTextContent(), 
+
+                Weather weather = new Weather(weatherList.item(0).getTextContent(),
                         weatherList.item(1).getTextContent());
-                
-                this.add(new Forecast(city, weather));
+
+                observableList.add(new Forecast(city, weather));
             }
-            
-            
-            
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ForecastArray.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(ForecastArray.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (ParserConfigurationException | SAXException ex) {
+            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            return;
         }
-    }*/
-
-    public void add(String address) throws IOException, NoResultsException {
-        City city = GoogleMapsGeocoding.getCity(address);
-        Forecast forecast = Forecast.getInstance(city);
-        this.add(forecast);
-
-        System.out.println(forecast);
     }
 
-    public void exportXML() {
+    public static void add(String address) throws IOException, NoResultsException {
+
+        City city = GoogleMapsGeocoding.getCity(address);
+        Forecast forecast = Forecast.getInstance(city);
+        
+        observableList.add(forecast);
+
+        System.out.println(forecast);
+
+    }
+
+    public static void remove(String city) {
+        for (Forecast forecast : ForecastArrayList.observableList) {
+            if (forecast.getCity().getName().equals(city)) {
+                ForecastArrayList.observableList.remove(forecast);
+                return;
+            }
+        }
+    }
+
+    public static void exportXML() {
+
+        //Se non ci sono elementi, non creo nessun file xml. Se lo creassi mi lancerebbe eccezione la volta che avvio dopo
+        if (observableList.size() <= 0) {
+            return;
+        }
+
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -101,10 +108,10 @@ public class ForecastArray extends ArrayList<Forecast> {
             Element rootElement = doc.createElement("forecast_array");
             doc.appendChild(rootElement);
 
-            for (Forecast forecast : this) {
+            for (Forecast forecast : observableList) {
                 Element forecastElement = doc.createElement("forecast");
                 rootElement.appendChild(forecastElement);
-                
+
                 //City
                 Element cityElement = doc.createElement("city");
                 forecastElement.appendChild(cityElement);
@@ -123,7 +130,7 @@ public class ForecastArray extends ArrayList<Forecast> {
                 Element nameElement = doc.createElement("name");
                 nameElement.appendChild(doc.createTextNode(forecast.getCity().getName()));
                 cityElement.appendChild(nameElement);
-                
+
                 //Weather
                 Element weatherElement = doc.createElement("weather");
                 forecastElement.appendChild(weatherElement);
@@ -142,16 +149,16 @@ public class ForecastArray extends ArrayList<Forecast> {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File("forecast_array.xml"));
-            
+
             transformer.transform(source, result);
             System.out.println("XML File Done");
 
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ForecastArray.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(ForecastArray.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(ForecastArray.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

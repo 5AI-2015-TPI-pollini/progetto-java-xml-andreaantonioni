@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<forecast_array>
-    <forecast>
-        <city>
-            <coordinates>
-                <lat>45.5560044</lat>
-                <lng>10.2155836</lng>
-            </coordinates>
-            <name>Brescia</name>
-        </city>
-        <weather>
-            <description>Partly Cloudy</description>
-            <url_icon>http://icons.wxug.com/i/c/k/partlycloudy.gif</url_icon>
-        </weather>
-    </forecast>
-</forecast_array>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><forecast_array><forecast><city><coordinates><lat>45.4654219</lat><lng>9.1859243</lng></coordinates><name>Milan</name></city><weather><description>Clear</description><url_icon>http://icons.wxug.com/i/c/k/nt_clear.gif</url_icon></weather></forecast></forecast_array>
