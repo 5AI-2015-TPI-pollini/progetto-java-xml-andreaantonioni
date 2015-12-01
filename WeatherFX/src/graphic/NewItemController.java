@@ -17,7 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import weatherfx.ForecastArrayList;
+import weatherfx.ForecastObservableList;
 
 /**
  * FXML Controller class
@@ -44,7 +44,7 @@ public class NewItemController implements Initializable {
     @FXML
     private void handleOkAction(ActionEvent event) {
         try {
-            ForecastArrayList.add(searchField.getText());
+            ForecastObservableList.add(searchField.getText());
         } catch (IOException ex) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("WeatherFX");

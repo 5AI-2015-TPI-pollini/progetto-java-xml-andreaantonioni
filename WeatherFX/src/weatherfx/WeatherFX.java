@@ -23,7 +23,7 @@ public class WeatherFX extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         
-        ForecastArrayList.importXML(new File("forecast_array.xml"));
+        ForecastObservableList.importXML(new File("config.xml"));
         
         Parent root = FXMLLoader.load(getClass().getResource("/graphic/GUI.fxml"));
         
@@ -31,7 +31,7 @@ public class WeatherFX extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent we) {
-                ForecastArrayList.exportXML();
+                ForecastObservableList.exportXML();
             }
         });
         

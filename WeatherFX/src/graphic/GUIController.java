@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import weatherfx.Forecast;
-import weatherfx.ForecastArrayList;
+import weatherfx.ForecastObservableList;
 import weatherfx.ForecastCellRender;
 
 /**
@@ -37,7 +37,7 @@ public class GUIController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        list.setItems(ForecastArrayList.observableList);
+        list.setItems(ForecastObservableList.observableList);
 
         list.setCellFactory(new Callback<ListView<Forecast>, ListCell<Forecast>>() {
 

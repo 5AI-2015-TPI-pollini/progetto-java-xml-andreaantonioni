@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package graphic;
 
 import java.io.IOException;
@@ -28,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utility.Utility;
 import weatherfx.Forecast;
-import weatherfx.ForecastArrayList;
+import weatherfx.ForecastObservableList;
 
 /**
  * FXML Controller class
@@ -95,7 +90,7 @@ public class SettingsController implements Initializable {
     private void handleRemoveCityButton(ActionEvent event) {
         if(!removeCityButton.isDisable() && cityList.getSelectionModel().getSelectedItem()!=null)
         {
-            ForecastArrayList.remove(cityList.getSelectionModel().getSelectedItem());
+            ForecastObservableList.remove(cityList.getSelectionModel().getSelectedItem());
             updateCityList();
         }
 
@@ -177,7 +172,7 @@ public class SettingsController implements Initializable {
 
         ObservableList<String> observableCityList = FXCollections.observableArrayList();
 
-        for (Forecast forecast : ForecastArrayList.observableList) {
+        for (Forecast forecast : ForecastObservableList.observableList) {
             observableCityList.add(forecast.getCity().getName());
         }
 
