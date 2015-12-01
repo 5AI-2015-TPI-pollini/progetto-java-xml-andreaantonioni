@@ -111,14 +111,20 @@ public class SettingsController implements Initializable {
         if (useProxy.isSelected()) {
             serverLabel.setDisable(false);
             portLabel.setDisable(false);
+            serverField.setDisable(false);
+            portField.setDisable(false);
             authentication.setDisable(false);
         } else {
             serverLabel.setDisable(true);
             portLabel.setDisable(true);
+            serverField.setDisable(true);
+            portField.setDisable(true);
             authentication.setSelected(false);
             authentication.setDisable(true);
             userLabel.setDisable(true);
             passwordLabel.setDisable(true);
+            userField.setDisable(true);
+            passwordField.setDisable(true);
         }
     }
 
@@ -127,9 +133,13 @@ public class SettingsController implements Initializable {
         if (authentication.isSelected()) {
             userLabel.setDisable(false);
             passwordLabel.setDisable(false);
+            userField.setDisable(false);
+            passwordField.setDisable(false);
         } else {
             userLabel.setDisable(true);
             passwordLabel.setDisable(true);
+            userField.setDisable(true);
+            passwordField.setDisable(true);
         }
     }
 
