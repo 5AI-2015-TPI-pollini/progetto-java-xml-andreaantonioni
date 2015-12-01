@@ -28,7 +28,7 @@ import org.xml.sax.SAXException;
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
-public class ForecastArrayList {
+public class ForecastObservableList {
 
     public static ObservableList<Forecast> observableList = FXCollections.observableArrayList();
 
@@ -67,7 +67,7 @@ public class ForecastArrayList {
             }
 
         } catch (ParserConfigurationException | SAXException ex) {
-            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastObservableList.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             return;
         }
@@ -85,9 +85,9 @@ public class ForecastArrayList {
     }
 
     public static void remove(String city) {
-        for (Forecast forecast : ForecastArrayList.observableList) {
+        for (Forecast forecast : ForecastObservableList.observableList) {
             if (forecast.getCity().getName().equals(city)) {
-                ForecastArrayList.observableList.remove(forecast);
+                ForecastObservableList.observableList.remove(forecast);
                 return;
             }
         }
@@ -148,17 +148,17 @@ public class ForecastArrayList {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("forecast_array.xml"));
+            StreamResult result = new StreamResult(new File("config.xml"));
 
             transformer.transform(source, result);
             System.out.println("XML File Done");
 
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastObservableList.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastObservableList.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
-            Logger.getLogger(ForecastArrayList.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForecastObservableList.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
