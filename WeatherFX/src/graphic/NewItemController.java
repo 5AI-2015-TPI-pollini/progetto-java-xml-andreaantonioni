@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import weatherfx.ForecastObservableList;
 
@@ -32,6 +33,8 @@ public class NewItemController implements Initializable {
     private Button okButton;
     @FXML
     private Button cancelButton;
+    @FXML
+    private AnchorPane newItemPane;
 
     /**
      * Initializes the controller class.

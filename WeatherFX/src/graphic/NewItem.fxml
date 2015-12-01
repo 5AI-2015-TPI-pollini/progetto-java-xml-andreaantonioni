@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="400.0" minHeight="183.0" minWidth="300.0" prefHeight="183.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.NewItemController">
+<StackPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphic.NewItemController">
    <children>
-      <Label layoutX="112.0" layoutY="35.0" text="Insert a city:" />
-      <TextField fx:id="searchField" layoutX="35.0" layoutY="73.0" prefHeight="27.0" prefWidth="230.0" />
-      <Button fx:id="okButton" layoutX="185.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="27.0" prefWidth="61.0" text="OK" />
-      <Button fx:id="cancelButton" layoutX="48.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleCancelAction" text="Cancel" />
+      <AnchorPane fx:id="newItemPane" maxHeight="600.0" maxWidth="400.0" minHeight="183.0" minWidth="300.0" prefHeight="183.0" prefWidth="300.0">
+         <children>
+            <Label layoutX="112.0" layoutY="35.0" text="Insert a city:" />
+            <TextField fx:id="searchField" layoutX="35.0" layoutY="73.0" prefHeight="27.0" prefWidth="230.0" />
+            <Button fx:id="okButton" layoutX="185.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="27.0" prefWidth="61.0" text="OK" />
+            <Button fx:id="cancelButton" layoutX="48.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleCancelAction" text="Cancel" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

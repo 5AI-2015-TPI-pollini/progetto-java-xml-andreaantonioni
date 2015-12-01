@@ -68,15 +68,17 @@ public class Forecast {
         XPathExpression weatherExpression;
         NodeList weatherList = null;
         try {
+            //attenzione, le istruzione non vengono eseguite in ordine in cui vengono inserite, ma nell'ordine in cui sono presenti i tag nel file XML
             weatherExpression = xpath.compile("/response/current_observation/weather/text() | "
-                    + "/response/current_observation/icon_url/text()");
+                    + "/response/current_observation/icon_url/text() |" 
+                    + "/response/current_observation/temp_c/text()");
             weatherList = (NodeList) weatherExpression.evaluate(doc, XPathConstants.NODESET);
             
         } catch (XPathExpressionException ex) {
             Logger.getLogger(GoogleMapsGeocoding.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return new Weather(weatherList.item(0).getNodeValue(), weatherList.item(1).getNodeValue());
+        return new Weather(weatherList.item(0).getNodeValue(), weatherList.item(2).getNodeValue(), weatherList.item(1).getNodeValue());
     }
     
     /**

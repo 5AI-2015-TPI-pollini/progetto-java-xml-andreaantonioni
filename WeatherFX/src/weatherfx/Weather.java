@@ -13,10 +13,15 @@ package weatherfx;
 public class Weather {
     private String description;
     private String urlIcon;
+    private String temperature;
 
-    public Weather(String description, String urlIcon) {
+    public Weather(String description, String urlIcon, String temperature) {
         this.description = description;
         this.urlIcon = urlIcon;
+        if(temperature.indexOf(".")<0)
+            this.temperature = temperature;
+        else this.temperature = temperature.substring(0, temperature.indexOf("."));
+        this.temperature+="°";
     }
 
     public String getDescription() {
@@ -34,10 +39,19 @@ public class Weather {
     public void setUrlIcon(String urlIcon) {
         this.urlIcon = urlIcon;
     }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+    
     
     @Override
     public String toString()
     {
-        return description;
+        return description + " - " + temperature;
     }
 }

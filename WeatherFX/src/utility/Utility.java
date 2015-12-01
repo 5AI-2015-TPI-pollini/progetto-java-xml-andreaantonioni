@@ -37,6 +37,7 @@ public class Utility {
      */
     public static Document importXML(URL url) throws IOException {
 
+        System.out.println(url);
         URLConnection urlConnection = url.openConnection();
         InputStream inStream = new BufferedInputStream(urlConnection.getInputStream());
 
