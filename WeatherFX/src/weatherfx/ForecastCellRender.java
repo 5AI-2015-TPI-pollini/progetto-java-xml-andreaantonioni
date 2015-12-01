@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -61,7 +62,7 @@ public class ForecastCellRender extends ListCell<Forecast> {
         }
     }
 
-    private void initCell() {
+    /*private void initCell() {
         Forecast item = getItem();
         if(item == null)
         {
@@ -88,6 +89,41 @@ public class ForecastCellRender extends ListCell<Forecast> {
         
         borderPane.setLeft(pane);
         borderPane.setRight(hbox);
+        
+        setGraphic(borderPane);
+    }*/
+    
+    private void initCell() {
+        Forecast item = getItem();
+        if(item == null)
+        {
+            setGraphic(null);
+            return;
+        }
+        
+        BorderPane borderPane = new BorderPane();
+
+        StackPane pane = new StackPane();
+        Label city = new Label(item.getCity().getName());
+        city.setFont(new Font("Helvetica", 18));
+        pane.getChildren().add(city);
+        
+        GridPane gridPane = new GridPane();
+        ColumnConstraints icon = new ColumnConstraints(25);
+        ColumnConstraints temperatures = new ColumnConstraints(75);
+        gridPane.getColumnConstraints().addAll(icon,temperatures);
+        gridPane.setHgap(100);
+        
+        
+        ImageView image = new ImageView(item.getWeather().getUrlIcon());
+        gridPane.add(image, 0, 0);
+        
+        Label temperature = new Label(item.getWeather().getTemperature());
+        temperature.setFont(new Font("Helvetica", 30));
+        gridPane.add(temperature, 1, 0);
+        
+        borderPane.setLeft(pane);
+        borderPane.setRight(gridPane);
         
         setGraphic(borderPane);
     }
