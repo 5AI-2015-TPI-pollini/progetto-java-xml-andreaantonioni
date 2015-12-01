@@ -1,10 +1,12 @@
 package utility;
 
 import GoogleMapsGeocode.GoogleMapsGeocoding;
+import graphic.SettingsController;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Authenticator;
+import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLConnection;
@@ -18,16 +20,18 @@ import org.xml.sax.SAXException;
 
 /**
  * This class contains utility methods.
- * 
+ *
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
 public class Utility {
 
     /**
-     * It sends an HTTP request to an internet service and it imports the XML like answer.
-     * 
-     * @param url it's an URL object which represents the url to use for the HTTP request.
+     * It sends an HTTP request to an internet service and it imports the XML
+     * like answer.
+     *
+     * @param url it's an URL object which represents the url to use for the
+     * HTTP request.
      * @return A Document object which contains the XML.
      * @throws IOException If the internet connection doesn't work.
      */
@@ -48,9 +52,10 @@ public class Utility {
 
         return doc;
     }
-    
+
     /**
      * It sets the proxy settings for the internet connection.
+     *
      * @param server A String which represents the server ip.
      * @param porta A String which represents the number of the port.
      */
@@ -61,7 +66,9 @@ public class Utility {
     }
 
     /**
-     * It sets the proxy settings with authentication for the internet connection.
+     * It sets the proxy settings with authentication for the internet
+     * connection.
+     *
      * @param server A String which represents the server ip.
      * @param porta A String which represents the number of the port.
      * @param username A String which represents the username.
@@ -81,5 +88,20 @@ public class Utility {
         });
 
     }
-    
+
+    public static boolean checkInternetConnection() {
+        try {
+            URL url = new URL("http://www.google.com");
+            InputStream in = url.openStream();
+            System.out.println("Connection estabiled");
+            return true;
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            return false;
+        }
+        
+        return false;
+    }
+
 }
