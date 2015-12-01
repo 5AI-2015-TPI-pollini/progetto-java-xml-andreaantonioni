@@ -1,8 +1,6 @@
 package graphic;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -140,17 +139,19 @@ public class SettingsController implements Initializable {
 
     @FXML
     private void handleSaveAction(ActionEvent event) {
-        //UTILIZZAR ELA NUOVA FUNZIONE SETPROXY PER PROXY SENZA AUTENTICAZIONE
-        if (useProxy.isSelected()) {
-            Utility.setProxy(serverField.getText(), portField.getText(), userField.getText(), passwordField.getText());
-            try {
-                URL url = new URL("http://www.google.com");
-                InputStream in = url.openStream();
-                System.out.println("Connection estabiled");
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if (useProxy.isSelected()) 
+        {
+            if(authentication.isSelected())
+                Utility.setProxy(serverField.getText(), portField.getText(), userField.getText(), passwordField.getText());
+            else Utility.setProxy(serverField.getText(), portField.getText());
+            
+            if(!Utility.checkInternetConnection())
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("WeatherFX");
+                alert.setContentText("Check your internet connection");
+                alert.showAndWait();
             }
         }
 
