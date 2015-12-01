@@ -15,8 +15,6 @@ import javafx.stage.WindowEvent;
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  * 
- * BUG:
- * - con il proxy, se c'è il file da caricare, non carica l'icona e si vede solo il nome della città. Fare in modo che non carichi nemmeno il file
  */
 public class WeatherFX extends Application {
     

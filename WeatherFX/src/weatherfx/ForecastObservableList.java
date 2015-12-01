@@ -22,6 +22,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import utility.Utility;
 
 /**
  *
@@ -33,6 +34,9 @@ public class ForecastObservableList {
     public static ObservableList<Forecast> observableList = FXCollections.observableArrayList();
 
     public static void importXML(File inputXML) {
+        if(!Utility.checkInternetConnection())
+            return;
+        
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -57,13 +61,7 @@ public class ForecastObservableList {
 
                 City city = new City(new Coordinates(lat, lng), name);
 
-                //Weather
-                NodeList weatherList = forecastList.item(1).getChildNodes();
-
-                Weather weather = new Weather(weatherList.item(0).getTextContent(),
-                        weatherList.item(1).getTextContent());
-
-                observableList.add(new Forecast(city, weather));
+                observableList.add(Forecast.getInstance(city));
             }
 
         } catch (ParserConfigurationException | SAXException ex) {
@@ -130,18 +128,6 @@ public class ForecastObservableList {
                 Element nameElement = doc.createElement("name");
                 nameElement.appendChild(doc.createTextNode(forecast.getCity().getName()));
                 cityElement.appendChild(nameElement);
-
-                //Weather
-                Element weatherElement = doc.createElement("weather");
-                forecastElement.appendChild(weatherElement);
-
-                Element descriptionElement = doc.createElement("description");
-                descriptionElement.appendChild(doc.createTextNode(forecast.getWeather().getDescription()));
-                weatherElement.appendChild(descriptionElement);
-
-                Element urlIconElement = doc.createElement("url_icon");
-                urlIconElement.appendChild(doc.createTextNode(forecast.getWeather().getUrlIcon()));
-                weatherElement.appendChild(urlIconElement);
 
             }
 
