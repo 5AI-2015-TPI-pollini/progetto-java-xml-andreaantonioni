@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 public class Utility {
 
     /**
-     * It sends an HTTP request to an internet service and it imports the XML
+     * Sends an HTTP request to an internet service and it imports the XML
      * like answer.
      *
      * @param url it's an URL object which represents the url to use for the
@@ -55,7 +55,7 @@ public class Utility {
     }
 
     /**
-     * It sets the proxy settings for the internet connection.
+     * Sets the proxy settings for the internet connection.
      *
      * @param server A String which represents the server ip.
      * @param porta A String which represents the number of the port.
@@ -67,7 +67,7 @@ public class Utility {
     }
 
     /**
-     * It sets the proxy settings with authentication for the internet
+     * Sets the proxy settings with authentication for the internet
      * connection.
      *
      * @param server A String which represents the server ip.
@@ -90,6 +90,10 @@ public class Utility {
 
     }
 
+    /**
+     * Checks internet connection trying to connect to "www.google.com"
+     * @return true if it can connect to "www.google.com"
+     */
     public static boolean checkInternetConnection() {
         try {
             URL url = new URL("http://www.google.com");

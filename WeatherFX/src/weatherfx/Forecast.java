@@ -24,6 +24,9 @@ public class Forecast {
     private City city;
     private Weather weather;
     
+    /**
+     * Represents the first peace of the URL to connects to Wunderground to asks weather forecast.
+     */
     private static final String wunderground = "http://api.wunderground.com/api/3a361d678e2fb458/conditions/forecast/q/";
     
     Forecast(City city, Weather weather)
@@ -64,11 +67,17 @@ public class Forecast {
         return new Forecast(city, getWeather(xpath, doc));
     }
 
+    /**
+     * Returns a Weather object obtained using XPath to detect information inside Document object.
+     * @param xpath A XPath object
+     * @param doc A Documentation object which contains the XML
+     * @return A new Weather object
+     */
     private static Weather getWeather(XPath xpath, Document doc) {
         XPathExpression weatherExpression;
         NodeList weatherList = null;
         try {
-            //attenzione, le istruzione non vengono eseguite in ordine in cui vengono inserite, ma nell'ordine in cui sono presenti i tag nel file XML
+            //WARNING: XPath expression aren't executed one at a time as they are found in the file
             weatherExpression = xpath.compile("/response/current_observation/weather/text() | "
                     + "/response/current_observation/icon_url/text() |" 
                     + "/response/current_observation/temp_c/text()");

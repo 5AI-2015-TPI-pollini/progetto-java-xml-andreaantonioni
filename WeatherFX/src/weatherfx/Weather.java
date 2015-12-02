@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package weatherfx;
 
 /**
- * 
+ * Represents a weather forecast.
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
@@ -15,6 +10,12 @@ public class Weather {
     private String urlIcon;
     private String temperature;
 
+    /**
+     * Creates a new Weather object
+     * @param description A String object which represents the description of the weather
+     * @param urlIcon A String object which contains the URL for the icon
+     * @param temperature A String object which represents the temperature
+     */
     public Weather(String description, String urlIcon, String temperature) {
         this.description = description;
         this.urlIcon = urlIcon;
@@ -24,31 +25,34 @@ public class Weather {
         this.temperature+="°";
     }
 
+    /**
+     * Returns a String object which contains the URL for the icon
+     * @return A String object which contains the URL for the icon
+     */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    /**
+     * Returns a String object which contains the URL
+     * @return A String object which contains the URL
+     */
     public String getUrlIcon() {
         return urlIcon;
     }
 
-    public void setUrlIcon(String urlIcon) {
-        this.urlIcon = urlIcon;
-    }
-
+    /**
+     * Returns a String object which represents the temperature
+     * @return A String object which represents the temperature
+     */
     public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
-    }
-    
-    
+    /**
+     * Returns a description of this Weather object.
+     * @return A String object which contains the description of the weather and the temperature
+     */
     @Override
     public String toString()
     {

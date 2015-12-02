@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GoogleMapsGeocode;
 
 /**
@@ -16,7 +11,7 @@ public class NoResultsException extends Exception{
     private String address;
     
     /**
-     * It creats a NoResutsException object which contains a String object.
+     * Creats a NoResutsException object which contains a String object.
      * @param address A String which represents the address which Google Maps doesn't found.
      * @see GoogleMapsGeocoding#getCity(java.lang.String) 
      */
@@ -25,7 +20,7 @@ public class NoResultsException extends Exception{
     }
 
     /**
-     * It returns the address which Google Maps doesn't found
+     * Returns the address which Google Maps doesn't found
      * @return A String which represents the address which Google Maps doesn't found.
      */
     public String getAddress() {

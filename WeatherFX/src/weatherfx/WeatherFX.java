@@ -12,6 +12,8 @@ import javafx.stage.WindowEvent;
 
 
 /**
+ * WeatherFX allows you to see taday weather forecast.
+ * 
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  * 
@@ -26,6 +28,8 @@ public class WeatherFX extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/graphic/GUI.fxml"));
         
         stage.setTitle("WeatherFX");
+        
+        //If the user click on X to close the program
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent we) {

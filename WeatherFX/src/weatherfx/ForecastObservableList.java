@@ -25,14 +25,26 @@ import org.xml.sax.SAXException;
 import utility.Utility;
 
 /**
- *
+ * Represents an ObservableList object which contains Forecast objects.
+ * 
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
  */
 public class ForecastObservableList {
 
+    /**
+     * It's an ArrayList object which contains all Forecast objects searched.
+     * When a Forecast object is added, it's graphically added to the ListView using ForecastCellRenderer.
+     * @see ForecastCellRender#this
+     * @see graphic.GUIController#list
+     */
     public static ObservableList<Forecast> observableList = FXCollections.observableArrayList();
 
+    /**
+     * Reads an XML file containing various tags referred to a City object, then sends an http request for the weather conditions.
+     * @param inputXML A File objects which represents an XML ("config.xml") which contains City objects.
+     * @see #exportXML() 
+     */
     public static void importXML(File inputXML) {
         if(!Utility.checkInternetConnection())
             return;
@@ -46,7 +58,8 @@ public class ForecastObservableList {
 
             NodeList list = doc.getElementsByTagName("forecast");
 
-            for (int i = 0; i < list.getLength(); i++) {
+            for (int i = 0; i < list.getLength(); i++) 
+            {
                 NodeList forecastList = list.item(i).getChildNodes();
 
                 //City
@@ -67,10 +80,17 @@ public class ForecastObservableList {
         } catch (ParserConfigurationException | SAXException ex) {
             Logger.getLogger(ForecastObservableList.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            return;
         }
     }
 
+    /**
+     * Adds a new Forecast object created using the address param
+     * @param address A String object which contains a description which identies a place on Earth
+     * @see GoogleMapsGeocoding#getCity(java.lang.String) 
+     * @see weatherfx.Forecast#getInstance(weatherfx.City) 
+     * @throws IOException If the internet connection doesn't work
+     * @throws NoResultsException If the address doesn't decribe a valid place on Earth
+     */
     public static void add(String address) throws IOException, NoResultsException {
 
         City city = GoogleMapsGeocoding.getCity(address);
@@ -82,19 +102,31 @@ public class ForecastObservableList {
 
     }
 
+    /**
+     * Removes a City object using its name.
+     * @param city A String which represents the name of the City object to remove
+     * @see ObservableList#remove(java.lang.Object) 
+     */
     public static void remove(String city) {
-        for (Forecast forecast : ForecastObservableList.observableList) {
-            if (forecast.getCity().getName().equals(city)) {
+        for (Forecast forecast : ForecastObservableList.observableList) 
+        {
+            if (forecast.getCity().getName().equals(city)) 
+            {
                 ForecastObservableList.observableList.remove(forecast);
                 return;
             }
         }
     }
 
+    /**
+     * Saves the ObservableList as an XML file called "config.xml". If the ObservableList is empty it doesn't work.
+     * @see #observableList
+     */
     public static void exportXML() {
 
-        //Se non ci sono elementi, non creo nessun file xml. Se lo creassi mi lancerebbe eccezione la volta che avvio dopo
-        if (observableList.size() <= 0) {
+        //If the list is empty, it doesn't create the file
+        if (observableList.size() <= 0) 
+        {
             return;
         }
 

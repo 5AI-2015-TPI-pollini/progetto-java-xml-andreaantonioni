@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GoogleMapsGeocode;
 
 import java.io.IOException;
@@ -32,7 +27,7 @@ public class GoogleMapsGeocoding {
     private static final String xmlRequest = "http://maps.googleapis.com/maps/api/geocode/xml?address=";
 
     /**
-     * It returns a City object obtained using the geocoding service offered by Google Maps to geocode a place.
+     * Returns a City object obtained using the geocoding service offered by Google Maps to geocode a place.
      * @param address A String which represents the place to geocode
      * @return A City object
      * @see City#this
@@ -67,6 +62,13 @@ public class GoogleMapsGeocoding {
 
     }
 
+    /**
+     * Returns a Coordinates object obtained using XPath to detect information inside Document object.
+     * @param xpath A XPath object
+     * @param doc A Documentation object which contains the XML
+     * @return A new Coordinates object
+     * @see weatherfx.Coordinates#this
+     */
     private static Coordinates getCoordinates(XPath xpath, Document doc) {
         XPathExpression coordinatesExpression;
         NodeList coordinatesList = null;
@@ -82,6 +84,13 @@ public class GoogleMapsGeocoding {
         return new Coordinates(coordinatesList.item(0).getNodeValue(), coordinatesList.item(1).getNodeValue());
     }
 
+    /**
+     * Checks if the Documents objects contains information or it's empty. 
+     * If it's empty means that the user described a place which doesn't exist on Earth.
+     * @param xpath A XPath object
+     * @param doc A Documentation object which contains the XML
+     * @return true if there's a result
+     */
     private static boolean checkResults(XPath xpath, Document doc) {
         try {
             XPathExpression statusExpression = xpath.compile("/GeocodeResponse/status/text()");

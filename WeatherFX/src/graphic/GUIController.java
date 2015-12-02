@@ -20,7 +20,7 @@ import weatherfx.ForecastObservableList;
 import weatherfx.ForecastCellRender;
 
 /**
- * FXML Controller class
+ * FXML Controller class of "GUI.fxml"
  *
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>
@@ -33,7 +33,9 @@ public class GUIController implements Initializable {
     private ImageView settingsButton;
 
     /**
-     * Initializes the controller class.
+     * ListView displays the objects contained in ForecastObsevableList adn decides how to render using ForecastCellRenderer
+     * @see weatherfx.ForecastObservableList#this
+     * @see weatherfx.ForecastCellRender#this
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -46,11 +48,6 @@ public class GUIController implements Initializable {
                 return new ForecastCellRender();
             }
         });
-        
-        //Non fa colorare di blu gli items
-        //Ma fa lanciare quella stupida NullPointerException
-        //list.setFocusModel(null);
-
     }
 
     @FXML

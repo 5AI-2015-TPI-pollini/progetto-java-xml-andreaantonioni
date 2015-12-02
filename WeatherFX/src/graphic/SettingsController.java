@@ -25,7 +25,7 @@ import weatherfx.Forecast;
 import weatherfx.ForecastObservableList;
 
 /**
- * FXML Controller class
+ * FXML Controller class of "Settings.fxml"
  *
  * @author Andrea Antonioni -
  * <a href="mailto:andreaantonioni97@gmail.com">andreaantonioni97@gmail.com</a>

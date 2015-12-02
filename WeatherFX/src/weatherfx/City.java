@@ -38,7 +38,7 @@ public class City {
     }
 
     /**
-     * It returns A String object which represents the name of the city.
+     * Returns a String object which represents the name of the city.
      * @return A String object which represents the name of the city.
      */
     public String getName() {
