@@ -30,7 +30,7 @@ public class GoogleMapsGeocoding {
      * Returns a City object obtained using the geocoding service offered by Google Maps to geocode a place.
      * @param address A String which represents the place to geocode
      * @return A City object
-     * @see City#this
+     * @see weatherfx.City
      * @throws IOException If the internet connection doesn't work it throws this exception.
      * @throws NoResultsException If Google Maps doens't find the address.
      */

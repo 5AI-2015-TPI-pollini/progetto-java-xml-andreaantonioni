@@ -34,8 +34,8 @@ public class GUIController implements Initializable {
 
     /**
      * ListView displays the objects contained in ForecastObsevableList adn decides how to render using ForecastCellRenderer
-     * @see weatherfx.ForecastObservableList#this
-     * @see weatherfx.ForecastCellRender#this
+     * @see weatherfx.ForecastObservableList
+     * @see weatherfx.ForecastCellRender
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -35,7 +35,7 @@ public class ForecastObservableList {
     /**
      * It's an ArrayList object which contains all Forecast objects searched.
      * When a Forecast object is added, it's graphically added to the ListView using ForecastCellRenderer.
-     * @see ForecastCellRender#this
+     * @see ForecastCellRender
      * @see graphic.GUIController#list
      */
     public static ObservableList<Forecast> observableList = FXCollections.observableArrayList();

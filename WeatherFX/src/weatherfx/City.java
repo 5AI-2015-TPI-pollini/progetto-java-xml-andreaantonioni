@@ -23,7 +23,7 @@ public class City {
     /**
      * It returns a Coordinates object which represents the coordinates of the city.
      * @return A Coordinates object of the city.
-     * @see Coordinates#this
+     * @see weatherfx.Coordinates
      */
     public Coordinates getCoordinates() {
         return coordinates;
